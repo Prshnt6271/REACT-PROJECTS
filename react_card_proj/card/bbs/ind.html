@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+
+    <div class="mx-auto text-center">
+        <h1 class="mb-0 text-white bg-dark border-bottom border-white pb-3"><i>API-INTEGRATION</i></h1>
+        <h2 class="text-white bg  border-bottom border-white pb-3"><i>SPRING-BOOT-CURD</i></h2>
+    </div>
+</nav>
+
+<div class="container ">
+    <div class="row mt-3">
+        <h1><i>List Of Students.......</i></h1>
+    </div>
+    <div th:if="${successMessage}" class="alert alert-primary" role="alert">
+        <h5>
+            <i th:text="${successMessage}"></i>
+        </h5>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h5>
+            <i th:text="${errorMessage}"></i>
+        </h5>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="text-center pb-4">
+        <a th:href="@{/add-new}" class="btn btn-primary btn-lg">Add Student</a>
+    </div>
+
+
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Adress</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Email</th>
+            <th>Phone</th>
+             <th>Action</th>
+             
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.FirstName}"></td>
+            <td th:text="${user.LastName}"></td>
+            <td th:text="${user.Adress}"></td>
+            <td th:text="${user.City}"></td>
+            <td th:text="${user.State}"></td>
+             <td th:text="${user.Email}"></td>
+              <td th:text="${user.Phone}"></td>
+               <td th:text="${user.Action}"></td>
+            <td>
+                <!-- Update link -->
+                <a th:href="@{'/update/' + ${user.id}}" class="btn btn-primary">Update</a>
+
+                <!-- Delete link -->
+                <a th:href="@{'/delete/' + ${user.id}}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
